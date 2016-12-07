@@ -11,4 +11,4 @@
 * npm install
 * 热替换使用npm run dev
 * 手动打包使用npm run build
-* 访问
+* 访问http://localhost:3000/
