@@ -1,10 +1,10 @@
 var path = require('path');
 var webpack = require('webpack');
 
-var config = {
+module.exports = {
     entry: [
         'webpack-dev-server/client?http://0.0.0.0:3000',
-        'webpack/hot/dev-server',
+        'webpack/hot/only-dev-server',
         path.resolve(__dirname, 'src/index.js')
     ],
     output: {
@@ -14,12 +14,20 @@ var config = {
     module: {
         loaders: [{
             test: /\.jsx?$/,
-            loaders: ['react-hot','babel-loader?presets[]=react,presets[]=es2015'],
+            loaders: ['react-hot','babel'],
             exclude: /node_modules/,
+        },{
+            test: /\.css$/,
+            loader: 'style!css',
+        },{
+            test: /\.(png|jpg|gif)$/,
+            loader: 'url?limit=30000'
         }]
+    },
+    babel: {
+        presets: ['es2015', 'stage-0', 'react'],
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin()
     ],
 };
-module.exports = config;
